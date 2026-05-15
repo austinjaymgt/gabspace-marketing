@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gabspace — Business clarity for creative entrepreneurs</title>
+  <meta name="description" content="One clean space to manage clients, projects, finances, and marketing. Built for creative entrepreneurs. Now in closed beta."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+
+  <!-- =============================================
+    FILL THESE IN BEFORE DEPLOYING
+    Find them in: Supabase Dashboard → Settings → API
+  ============================================= -->
+  <script>
+    const SUPABASE_URL  = "https://qidleiqkwwayaliwlztd.supabase.co";
+    const SUPABASE_ANON = "sb_publishable_VzThGwrDvGLisScM2yStkA_8eVUwmH1";
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1A1A2E;
+      --ink2: #3D3D5C;
+      --ink3: #8585A0;
+      --cream: #F7F5F0;
+      --white: #FFFFFF;
+      --sage: #6B8F71;
+      --sage-pale: #EAF2EA;
+      --violet: #7C5CBF;
+      --violet-light: #C9B9E8;
+      --violet-pale: #F0EBF9;
+      --amber: #D4874E;
+      --amber-pale: #FBF0E6;
+      --rose: #C06B7A;
+      --rose-pale: #FAF0F2;
+      --border: rgba(26,26,46,0.09);
+      --border-soft: rgba(26,26,46,0.06);
+      --radius: 12px;
+      --radius-lg: 18px;
+      --radius-pill: 100px;
+    }
+
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2.5rem; border-bottom: 0.5px solid var(--border-soft); background: var(--cream); position: sticky; top: 0; z-index: 100; }
+    .logo-wrap { display: flex; align-items: center; gap: 10px; }
+    .logo-mark { width: 34px; height: 34px; background: linear-gradient(135deg, var(--violet), var(--sage)); border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .logo-mark svg { width: 18px; height: 18px; }
+    .logo-name { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.875rem; color: var(--ink3); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .btn { font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 500; border-radius: var(--radius-pill); padding: 0.6rem 1.35rem; cursor: pointer; border: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 5px; }
+    .btn-primary { background: var(--ink); color: var(--white); }
+    .btn-primary:hover { background: var(--ink2); transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+    .btn-ghost:hover { background: var(--white); }
+    .btn-lg { font-size: 1rem; padding: 0.8rem 2rem; }
+
+    /* ── HERO ── */
+    .hero { max-width: 860px; margin: 0 auto; padding: 5.5rem 2.5rem 4rem; text-align: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 7px; background: var(--violet-pale); color: var(--violet); font-size: 0.72rem; font-weight: 500; padding: 0.35rem 1rem; border-radius: var(--radius-pill); margin-bottom: 2rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--violet); animation: blink 2s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.4rem, 5.5vw, 3.8rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 1.4rem; }
+    .hero h1 em { font-style: italic; font-weight: 700; color: var(--violet); }
+    .hero p { font-size: 1.1rem; color: var(--ink2); max-width: 520px; margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.75; }
+    .hero-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .hero-note { font-size: 0.78rem; color: var(--ink3); margin-top: 1.1rem; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar { border-top: 0.5px solid var(--border-soft); border-bottom: 0.5px solid var(--border-soft); padding: 1.1rem 2.5rem; display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 7px; font-size: 0.8rem; color: var(--ink3); }
+    .trust-item svg { width: 15px; height: 15px; color: var(--sage); flex-shrink: 0; }
+
+    /* ── APP PREVIEW ── */
+    .preview-wrap { max-width: 860px; margin: 4rem auto 0; padding: 0 2.5rem; }
+    .preview-shell { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .shell-bar { background: var(--cream); padding: 0.7rem 1.1rem; display: flex; align-items: center; gap: 6px; border-bottom: 0.5px solid var(--border-soft); }
+    .shell-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .shell-inner { display: grid; grid-template-columns: 170px 1fr; min-height: 320px; }
+    .shell-sidebar { background: var(--cream); border-right: 0.5px solid var(--border-soft); padding: 1.1rem 0.9rem; }
+    .shell-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 1.4rem; }
+    .shell-logo-mark { width: 24px; height: 24px; background: linear-gradient(135deg, var(--violet), var(--sage)); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .shell-logo-mark svg { width: 13px; height: 13px; }
+    .shell-logo-name { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+    .s-group { font-size: 0.62rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink3); margin: 1rem 0 0.3rem 0.4rem; }
+    .s-item { display: flex; align-items: center; gap: 7px; padding: 0.4rem 0.55rem; border-radius: 7px; font-size: 0.78rem; color: var(--ink3); margin-bottom: 1px; }
+    .s-item.on { background: var(--white); color: var(--ink); font-weight: 500; border: 0.5px solid var(--border-soft); }
+    .s-dot { width: 6px; height: 6px; border-radius: 2px; background: var(--ink3); flex-shrink: 0; }
+    .s-item.on .s-dot { background: var(--violet); }
+    .shell-main { padding: 1.4rem; }
+    .shell-greeting { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.2rem; }
+    .shell-sub { font-size: 0.72rem; color: var(--ink3); margin-bottom: 1.1rem; }
+    .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 1.1rem; }
+    .kpi { background: var(--cream); border: 0.5px solid var(--border-soft); border-radius: 9px; padding: 0.65rem 0.85rem; }
+    .kpi-l { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink3); margin-bottom: 3px; }
+    .kpi-v { font-size: 1.15rem; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .kpi-d { font-size: 0.65rem; color: var(--sage); margin-top: 2px; }
+    .clients-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink3); font-weight: 500; margin-bottom: 0.45rem; }
+    .c-row { display: flex; align-items: center; gap: 9px; padding: 0.5rem 0; border-bottom: 0.5px solid var(--border-soft); }
+    .c-av { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.62rem; font-weight: 600; flex-shrink: 0; }
+    .c-name { font-size: 0.78rem; font-weight: 500; flex: 1; }
+    .pill { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; border-radius: var(--radius-pill); padding: 3px 9px; }
+    .pill-v { background: var(--violet-pale); color: var(--violet); }
+    .pill-s { background: var(--sage-pale); color: var(--sage); }
+    .pill-a { background: var(--amber-pale); color: var(--amber); }
+
+    /* ── SECTIONS ── */
+    .section { max-width: 860px; margin: 0 auto; padding: 5rem 2.5rem; }
+    .section-eye { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--violet); margin-bottom: 0.9rem; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 0.9rem; color: var(--ink); }
+    .section-sub { font-size: 1rem; color: var(--ink2); max-width: 500px; font-weight: 300; line-height: 1.75; margin-bottom: 2.75rem; }
+
+    /* ── FEATURES ── */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
+    .feat { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.4rem; transition: border-color 0.2s, transform 0.2s; }
+    .feat:hover { border-color: var(--violet-light); transform: translateY(-2px); }
+    .feat-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.9rem; }
+    .feat-icon svg { width: 16px; height: 16px; }
+    .feat-title { font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; }
+    .feat-desc { font-size: 0.82rem; color: var(--ink3); line-height: 1.65; font-weight: 300; }
+
+    /* ── COMPARE ── */
+    .compare-wrap { background: var(--white); border-top: 0.5px solid var(--border-soft); border-bottom: 0.5px solid var(--border-soft); }
+    .compare-inner { max-width: 860px; margin: 0 auto; padding: 5rem 2.5rem; }
+    .compare-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+    .cmp { background: var(--cream); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.4rem; }
+    .cmp.on { border-color: var(--violet); border-width: 1.5px; background: var(--white); position: relative; }
+    .cmp-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--violet); color: var(--white); font-size: 0.68rem; font-weight: 500; padding: 3px 12px; border-radius: var(--radius-pill); white-space: nowrap; }
+    .cmp-name { font-size: 0.82rem; font-weight: 500; color: var(--ink); margin-bottom: 0.3rem; }
+    .cmp-price { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--ink); margin-bottom: 1rem; }
+    .cmp-price span { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--ink3); font-weight: 300; }
+    .cmp-list { list-style: none; }
+    .cmp-list li { font-size: 0.78rem; color: var(--ink2); padding: 0.38rem 0; border-bottom: 0.5px solid var(--border-soft); display: flex; align-items: center; gap: 6px; }
+    .cmp-list li:last-child { border-bottom: none; }
+    .ck { color: var(--sage); }
+    .cx { color: var(--ink3); }
+
+    /* ── BETA STEPS ── */
+    .beta-wrap { background: var(--ink); }
+    .beta-inner { max-width: 860px; margin: 0 auto; padding: 5rem 2.5rem; }
+    .beta-eye { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--violet-light); margin-bottom: 0.9rem; }
+    .beta-title { font-family: 'Syne', sans-serif; font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 0.9rem; color: var(--white); }
+    .beta-sub { font-size: 1rem; color: rgba(255,255,255,0.5); max-width: 520px; font-weight: 300; line-height: 1.75; margin-bottom: 2.75rem; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.25rem; }
+    .step { border: 0.5px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 1.4rem; }
+    .step-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: rgba(255,255,255,0.07); line-height: 1; margin-bottom: 0.65rem; }
+    .step-tag { display: inline-block; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; border-radius: var(--radius-pill); padding: 3px 9px; margin-bottom: 0.75rem; }
+    .tag-v { background: var(--violet-pale); color: var(--violet); }
+    .tag-s { background: var(--sage-pale); color: var(--sage); }
+    .tag-a { background: var(--amber-pale); color: var(--amber); }
+    .tag-r { background: var(--rose-pale); color: var(--rose); }
+    .step-title { font-size: 0.92rem; font-weight: 500; color: var(--white); margin-bottom: 0.4rem; }
+    .step-desc { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.65; font-weight: 300; }
+
+    /* ── FORM SECTION ── */
+    .form-wrap { background: var(--cream); }
+    .form-inner { max-width: 640px; margin: 0 auto; padding: 5rem 2.5rem; }
+    .form-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; }
+    .form-title { font-family: 'Syne', sans-serif; font-size: 1.75rem; font-weight: 800; color: var(--ink); letter-spacing: -0.025em; margin-bottom: 0.5rem; }
+    .form-sub { font-size: 0.9rem; color: var(--ink3); font-weight: 300; line-height: 1.6; margin-bottom: 2rem; }
+    .field { margin-bottom: 1.1rem; }
+    .field label { display: block; font-size: 0.8rem; font-weight: 500; color: var(--ink2); margin-bottom: 0.4rem; letter-spacing: 0.02em; }
+    .field input,
+    .field select { width: 100%; padding: 0.72rem 1rem; border: 1px solid var(--border); border-radius: 9px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--ink); background: var(--white); outline: none; transition: border-color 0.2s, box-shadow 0.2s; appearance: none; -webkit-appearance: none; }
+    .field input::placeholder { color: var(--ink3); }
+    .field input:focus,
+    .field select:focus { border-color: var(--violet); box-shadow: 0 0 0 3px var(--violet-pale); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .select-wrap { position: relative; }
+    .select-wrap::after { content: ''; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid var(--ink3); pointer-events: none; }
+    .submit-btn { width: 100%; padding: 0.9rem; background: var(--ink); color: var(--white); border: none; border-radius: var(--radius-pill); font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; }
+    .submit-btn:hover:not(:disabled) { background: var(--ink2); transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .form-note { font-size: 0.75rem; color: var(--ink3); text-align: center; margin-top: 0.85rem; }
+    .form-error { font-size: 0.8rem; color: var(--rose); margin-top: 0.4rem; display: none; }
+
+    /* ── SUCCESS STATE ── */
+    .success-state { display: none; text-align: center; padding: 1rem 0; }
+    .success-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--sage-pale); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+    .success-icon svg { width: 24px; height: 24px; }
+    .success-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--ink); margin-bottom: 0.6rem; }
+    .success-msg { font-size: 0.92rem; color: var(--ink3); font-weight: 300; line-height: 1.7; max-width: 380px; margin: 0 auto; }
+
+    /* ── CTA STRIP ── */
+    .cta-strip { background: linear-gradient(135deg, var(--violet), var(--sage)); padding: 5rem 2.5rem; text-align: center; }
+    .cta-strip h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: var(--white); margin-bottom: 0.9rem; letter-spacing: -0.02em; }
+    .cta-strip p { color: rgba(255,255,255,0.7); font-weight: 300; margin-bottom: 2rem; }
+    .btn-white { background: var(--white); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; padding: 0.85rem 2.25rem; border-radius: var(--radius-pill); border: none; cursor: pointer; transition: all 0.2s; }
+    .btn-white:hover { background: var(--cream); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 0.5px solid var(--border-soft); padding: 1.75rem 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .foot-logo { display: flex; align-items: center; gap: 8px; }
+    .foot-logo-mark { width: 22px; height: 22px; background: linear-gradient(135deg, var(--violet), var(--sage)); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .foot-logo-mark svg { width: 12px; height: 12px; }
+    .foot-name { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+    .foot-links { display: flex; gap: 1.5rem; list-style: none; }
+    .foot-links a { font-size: 0.78rem; color: var(--ink3); transition: color 0.2s; }
+    .foot-links a:hover { color: var(--ink); }
+    .foot-copy { font-size: 0.72rem; color: var(--ink3); }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .hero, .section, .beta-inner, .compare-inner, .form-inner { padding: 3.5rem 1.25rem; }
+      .preview-wrap { padding: 0 1.25rem; }
+      .compare-grid, .shell-inner, .field-row { grid-template-columns: 1fr; }
+      .shell-sidebar { display: none; }
+      .form-card { padding: 1.75rem 1.25rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-wrap">
+    <div class="logo-mark">
+      <svg viewBox="0 0 28 28" fill="none">
+        <rect x="3" y="3" width="9" height="9" rx="2.5" fill="white" opacity="0.9"/>
+        <rect x="16" y="3" width="9" height="9" rx="2.5" fill="white" opacity="0.55"/>
+        <rect x="3" y="16" width="9" height="9" rx="2.5" fill="white" opacity="0.55"/>
+        <rect x="16" y="16" width="9" height="9" rx="2.5" fill="white" opacity="0.9"/>
+      </svg>
+    </div>
+    <span class="logo-name">gabspace</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#apply">Early access</a></li>
+  </ul>
+  <a href="#apply" class="btn btn-primary">Request access</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">
+    <div class="eyebrow-dot"></div>
+    Closed beta — now accepting early users
+  </div>
+  <h1>Business clarity for<br/><em>creative entrepreneurs</em></h1>
+  <p>One clean space to manage clients, projects, finances, and marketing — without the learning curve. Built for how creatives actually work.</p>
+  <div class="hero-actions">
+    <a href="#apply" class="btn btn-primary btn-lg">Request early access →</a>
+    <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
+  </div>
+  <p class="hero-note">Free during beta &nbsp;·&nbsp; Limited spots &nbsp;·&nbsp; Your feedback shapes the product</p>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1l1.8 3.6L14 5.3l-3 2.9.7 4.1L8 10.3l-3.7 1.9.7-4.1L2 5.3l4.2-.7z"/></svg>
+    Built for creative businesses
+  </div>
+  <div class="trust-item">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>
+    Set up in under 10 minutes
+  </div>
+  <div class="trust-item">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="2"/><path d="M5 7h6M5 10h3"/></svg>
+    Client portal on every plan
+  </div>
+  <div class="trust-item">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5.5 8.5l2 2 3-4"/><circle cx="8" cy="8" r="6"/></svg>
+    No data locked behind exports
+  </div>
+</div>
+
+<!-- APP PREVIEW -->
+<div class="preview-wrap">
+  <div class="preview-shell">
+    <div class="shell-bar">
+      <div class="shell-dot" style="background:#E57373;"></div>
+      <div class="shell-dot" style="background:#FFB74D;"></div>
+      <div class="shell-dot" style="background:#81C784;"></div>
+    </div>
+    <div class="shell-inner">
+      <div class="shell-sidebar">
+        <div class="shell-logo">
+          <div class="shell-logo-mark">
+            <svg viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="9" height="9" rx="2.5" fill="white" opacity="0.9"/><rect x="16" y="3" width="9" height="9" rx="2.5" fill="white" opacity="0.55"/><rect x="3" y="16" width="9" height="9" rx="2.5" fill="white" opacity="0.55"/><rect x="16" y="16" width="9" height="9" rx="2.5" fill="white" opacity="0.9"/></svg>
+          </div>
+          <span class="shell-logo-name">gabspace</span>
+        </div>
+        <div class="s-group">Clients</div>
+        <div class="s-item on"><div class="s-dot"></div>Dashboard</div>
+        <div class="s-item"><div class="s-dot"></div>Clients</div>
+        <div class="s-item"><div class="s-dot"></div>Projects</div>
+        <div class="s-group">Business</div>
+        <div class="s-item"><div class="s-dot"></div>Finance</div>
+        <div class="s-item"><div class="s-dot"></div>Tasks</div>
+        <div class="s-item"><div class="s-dot"></div>Vendors</div>
+        <div class="s-group">Marketing</div>
+        <div class="s-item"><div class="s-dot"></div>Campaigns</div>
+        <div class="s-item"><div class="s-dot"></div>Events</div>
+      </div>
+      <div class="shell-main">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;">
+          <div>
+            <div class="shell-greeting">Good morning, Jordan</div>
+            <div class="shell-sub">April 2026 &nbsp;·&nbsp; 3 active projects</div>
+          </div>
+          <button class="btn btn-ghost" style="font-size:0.72rem;padding:0.35rem 0.8rem;">+ New client</button>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><div class="kpi-l">Revenue YTD</div><div class="kpi-v">$14,200</div><div class="kpi-d">↑ 18% vs last year</div></div>
+          <div class="kpi"><div class="kpi-l">Active clients</div><div class="kpi-v">9</div><div class="kpi-d">2 new this month</div></div>
+          <div class="kpi"><div class="kpi-l">Pending</div><div class="kpi-v">$3,800</div><div class="kpi-d">2 in progress</div></div>
+        </div>
+        <div class="clients-label">Recent clients</div>
+        <div class="c-row"><div class="c-av" style="background:var(--violet-pale);color:var(--violet);">SR</div><div class="c-name">Sarah R.</div><span class="pill pill-v">Active</span></div>
+        <div class="c-row"><div class="c-av" style="background:var(--amber-pale);color:var(--amber);">JM</div><div class="c-name">James M.</div><span class="pill pill-a">Prospect</span></div>
+        <div class="c-row"><div class="c-av" style="background:var(--sage-pale);color:var(--sage);">KL</div><div class="c-name">Kim L.</div><span class="pill pill-s">Completed</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-eye">Everything in one place</div>
+  <h2 class="section-title">Built around how creatives actually work</h2>
+  <p class="section-sub">Not a generic CRM. Not a complicated suite. Gabspace is structured for the way creative businesses move — from first inquiry to final delivery.</p>
+  <div class="features">
+    <div class="feat">
+      <div class="feat-icon" style="background:var(--violet-pale);"><svg viewBox="0 0 16 16" fill="none" stroke="#7C5CBF" stroke-width="1.5"><circle cx="6" cy="5" r="2.5"/><path d="M2 13c0-2.2 1.8-4 4-4s4 1.8 4 4"/><circle cx="11" cy="5" r="2"/><path d="M13 12.5c.6-.8 1-1.7 1-2.7"/></svg></div>
+      <div class="feat-title">Client management</div>
+      <div class="feat-desc">Track every client from lead to completed project with a built-in sales funnel — Lead, Prospect, Active, Completed.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon" style="background:var(--sage-pale);"><svg viewBox="0 0 16 16" fill="none" stroke="#6B8F71" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 6h6M5 9h4"/></svg></div>
+      <div class="feat-title">Project profiles</div>
+      <div class="feat-desc">Budget items, file uploads, contingency tracking, and project status — all in one shareable project view.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon" style="background:var(--amber-pale);"><svg viewBox="0 0 16 16" fill="none" stroke="#D4874E" stroke-width="1.5"><path d="M3 12V7l5-5 5 5v5H3z"/><path d="M6 12V9h4v3"/></svg></div>
+      <div class="feat-title">Simple finances</div>
+      <div class="feat-desc">Track revenue and expenses without the complexity. Monthly snapshots, YTD totals, and receipt uploads included.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon" style="background:var(--rose-pale);"><svg viewBox="0 0 16 16" fill="none" stroke="#C06B7A" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="2"/><path d="M5 7h6M5 10h3"/></svg></div>
+      <div class="feat-title">Client portal</div>
+      <div class="feat-desc">Share project updates with clients in a clean portal. They can react and comment — no login required.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon" style="background:var(--violet-pale);"><svg viewBox="0 0 16 16" fill="none" stroke="#7C5CBF" stroke-width="1.5"><path d="M2 11l4-4 3 3 5-6"/></svg></div>
+      <div class="feat-title">Marketing tracker</div>
+      <div class="feat-desc">Log campaigns and events, set goals, track outcomes, and see what's actually driving new business.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon" style="background:var(--sage-pale);"><svg viewBox="0 0 16 16" fill="none" stroke="#6B8F71" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg></div>
+      <div class="feat-title">Business dashboard</div>
+      <div class="feat-desc">A personalized overview of your business health — KPIs, recent activity, and upcoming work at a glance.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<div class="compare-wrap">
+  <div class="compare-inner">
+    <div class="section-eye">Why gabspace</div>
+    <h2 class="section-title">Not too rigid. Not too complex.</h2>
+    <p class="section-sub">HoneyBook locks you in. Dubsado takes weeks to configure. Gabspace works on day one — and grows with you.</p>
+    <div class="compare-grid">
+      <div class="cmp">
+        <div class="cmp-name">HoneyBook</div>
+        <div class="cmp-price">$39<span>/mo</span></div>
+        <ul class="cmp-list">
+          <li><span class="ck">✓</span>Client management</li>
+          <li><span class="ck">✓</span>Invoicing &amp; contracts</li>
+          <li><span class="cx">✗</span>Rigid, template-driven</li>
+          <li><span class="cx">✗</span>No marketing tracking</li>
+          <li><span class="cx">✗</span>Limited flexibility</li>
+        </ul>
+      </div>
+      <div class="cmp on">
+        <div class="cmp-badge">gabspace</div>
+        <div class="cmp-name">Gabspace</div>
+        <div class="cmp-price">Free<span> during beta</span></div>
+        <ul class="cmp-list">
+          <li><span class="ck">✓</span>Client management</li>
+          <li><span class="ck">✓</span>Project + finance tracking</li>
+          <li><span class="ck">✓</span>Works immediately</li>
+          <li><span class="ck">✓</span>Marketing &amp; event tracking</li>
+          <li><span class="ck">✓</span>Branded client portal</li>
+        </ul>
+      </div>
+      <div class="cmp">
+        <div class="cmp-name">Dubsado</div>
+        <div class="cmp-price">$40<span>/mo</span></div>
+        <ul class="cmp-list">
+          <li><span class="ck">✓</span>Highly customizable</li>
+          <li><span class="ck">✓</span>Powerful workflows</li>
+          <li><span class="cx">✗</span>Steep learning curve</li>
+          <li><span class="cx">✗</span>Weeks to set up</li>
+          <li><span class="cx">✗</span>Overwhelming for solo users</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BETA STEPS -->
+<div class="beta-wrap" id="how-it-works">
+  <div class="beta-inner">
+    <div class="beta-eye">Early access program</div>
+    <h2 class="beta-title">How the beta works</h2>
+    <p class="beta-sub">Gabspace is in closed beta. We're working closely with a small group of creative entrepreneurs to make sure the product fits the way you actually run your business — before we open the doors wider.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-tag tag-v">Apply</div>
+        <div class="step-title">Request access</div>
+        <div class="step-desc">Submit a short request below. We review every application and prioritize creatives who are actively managing clients and projects.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-tag tag-s">Onboard</div>
+        <div class="step-title">Get set up in minutes</div>
+        <div class="step-desc">We'll walk you through a quick onboarding checklist. No complicated setup — you'll be managing your first client the same day.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-tag tag-a">Use it</div>
+        <div class="step-title">Run your business</div>
+        <div class="step-desc">Use Gabspace for 4–6 weeks the way you'd use any real tool. Track clients, log revenue, update your portal, check your dashboard.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-tag tag-r">Share</div>
+        <div class="step-title">Give us feedback</div>
+        <div class="step-desc">A quick 20-minute call at the end. What worked? What didn't? What would you pay for? Your input directly shapes what gets built next.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPLY FORM -->
+<div class="form-wrap" id="apply">
+  <div class="form-inner">
+    <div class="form-card">
+
+      <!-- Default form state -->
+      <div id="form-state">
+        <div class="section-eye">Apply for early access</div>
+        <h2 class="form-title">Let's get you in.</h2>
+        <p class="form-sub">Fill in the details below and we'll review your application. Accepted users receive an access link and confirmation email within a few days.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="f-name">Full name</label>
+            <input type="text" id="f-name" placeholder="Jordan Smith" autocomplete="name"/>
+            <span class="form-error" id="err-name">Please enter your name</span>
+          </div>
+          <div class="field">
+            <label for="f-email">Email address</label>
+            <input type="email" id="f-email" placeholder="jordan@studio.com" autocomplete="email"/>
+            <span class="form-error" id="err-email">Please enter a valid email</span>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="f-type">Type of creative</label>
+            <div class="select-wrap">
+              <select id="f-type">
+                <option value="" disabled selected>Select your craft</option>
+                <option>Photographer</option>
+                <option>Videographer</option>
+                <option>Graphic designer</option>
+                <option>Interior designer</option>
+                <option>Illustrator / artist</option>
+                <option>Event planner</option>
+                <option>Content creator</option>
+                <option>Other creative</option>
+              </select>
+            </div>
+            <span class="form-error" id="err-type">Please select your creative type</span>
+          </div>
+          <div class="field">
+            <label for="f-social">Instagram or website</label>
+            <input type="text" id="f-social" placeholder="@yourhandle or yoursite.com"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-heard">How did you hear about Gabspace?</label>
+          <div class="select-wrap">
+            <select id="f-heard">
+              <option value="" disabled selected>Select one</option>
+              <option>Instagram</option>
+              <option>Facebook group</option>
+              <option>Reddit</option>
+              <option>Word of mouth / friend</option>
+              <option>Google search</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">
+          Apply for early access →
+        </button>
+        <p class="form-note">Free during beta &nbsp;·&nbsp; No credit card needed &nbsp;·&nbsp; Limited spots available</p>
+        <span class="form-error" id="err-global" style="display:block;text-align:center;margin-top:0.5rem;"></span>
+      </div>
+
+      <!-- Success state -->
+      <div class="success-state" id="success-state">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6B8F71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        <h3 class="success-title">You're on the list.</h3>
+        <p class="success-msg">We've received your application and sent a confirmation to your inbox. We'll be in touch soon with your access link.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <h2>Your business, finally organized.</h2>
+  <p>Join creatives already using Gabspace to run clearer, calmer businesses.</p>
+  <a href="#apply" class="btn-white">Request early access — it's free</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">
+    <div class="foot-logo-mark">
+      <svg viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="9" height="9" rx="2.5" fill="white" opacity="0.9"/><rect x="16" y="3" width="9" height="9" rx="2.5" fill="white" opacity="0.55"/><rect x="3" y="16" width="9" height="9" rx="2.5" fill="white" opacity="0.55"/><rect x="16" y="16" width="9" height="9" rx="2.5" fill="white" opacity="0.9"/></svg>
+    </div>
+    <span class="foot-name">gabspace</span>
+  </div>
+  <ul class="foot-links">
+  <li><a href="#features">Features</a></li>
+  <li><a href="#how-it-works">How it works</a></li>
+  <li><a href="#apply">Early access</a></li>
+  <li><a href="/privacy.html">Privacy</a></li>
+  <li><a href="/cookies.html">Cookies</a></li>
+  <li><a href="/acceptable-use.html">Acceptable Use</a></li>
+  <li><a href="/subprocessors.html">Subprocessors</a></li>
+</ul>
+  <div class="foot-copy">© 2026 Gabspace. All rights reserved.</div>
+</footer>
+
+<script>
+  async function handleSubmit() {
+    const btn = document.getElementById('submit-btn');
+    const name = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const type = document.getElementById('f-type').value;
+    const social = document.getElementById('f-social').value.trim();
+    const heard = document.getElementById('f-heard').value;
+
+    // Reset errors
+    document.querySelectorAll('.form-error').forEach(el => el.style.display = 'none');
+
+    let valid = true;
+    if (!name) { document.getElementById('err-name').style.display = 'block'; valid = false; }
+    if (!email || !email.includes('@')) { document.getElementById('err-email').style.display = 'block'; valid = false; }
+    if (!type) { document.getElementById('err-type').style.display = 'block'; valid = false; }
+    if (!valid) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/beta_requests`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON,
+          'Authorization': `Bearer ${SUPABASE_ANON}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          creative_type: type,
+          social_link: social || null,
+          how_heard: heard || null
+        })
+      });
+
+      if (res.status === 409) {
+        const errGlobal = document.getElementById('err-global');
+        errGlobal.textContent = "Looks like that email is already on the list. We'll be in touch soon.";
+        errGlobal.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Apply for early access →';
+        return;
+      }
+
+      if (!res.ok) throw new Error('Submission failed');
+
+      document.getElementById('form-state').style.display = 'none';
+      document.getElementById('success-state').style.display = 'block';
+
+    } catch (err) {
+      const errGlobal = document.getElementById('err-global');
+      errGlobal.textContent = 'Something went wrong. Please try again or email us directly.';
+      errGlobal.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Apply for early access →';
+    }
+  }
+</script>
+
+</body>
+</html>
