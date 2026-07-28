@@ -210,7 +210,7 @@
 
     <p class="tagline">A small circle of creative entrepreneurs, shaping Gabspace before anyone else sees it.</p>
 
-    <button class="cta-btn" onclick="openModal()">Join the Founders Circle →</button>
+    <button class="cta-btn" id="cta-btn" onclick="openModal()">Join the Founders Circle →</button>
 
     <p class="micro-note">Free during beta &nbsp;·&nbsp; Limited spots &nbsp;·&nbsp; Your feedback shapes the product</p>
   </main>
@@ -329,6 +329,24 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
   });
+
+  // When signups are open, skip the apply flow entirely and send people
+  // straight to the real signup page - the apply modal has no password
+  // field, so it was never able to create an account on its own. Defaults
+  // to the apply-modal button (already in the markup) if this check fails
+  // or hasn't resolved yet, since that path always works.
+  fetch(`${SUPABASE_URL}/rest/v1/platform_settings?select=signups_open`, {
+    headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }
+  })
+    .then(r => r.json())
+    .then(rows => {
+      if (rows[0]?.signups_open) {
+        const btn = document.getElementById('cta-btn');
+        btn.textContent = 'Get started free →';
+        btn.onclick = () => { window.location.href = 'https://app.gabspace.io'; };
+      }
+    })
+    .catch(() => {});
 
   async function handleSubmit() {
     const btn = document.getElementById('submit-btn');
