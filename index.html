@@ -303,7 +303,7 @@
           </div>
         </div>
         <h3 class="modal-success-title">You're in the circle.</h3>
-        <p class="modal-success-msg">We've received your application and sent a confirmation to your inbox. We review every founding member personally — we'll be in touch soon.</p>
+        <p class="modal-success-msg">We've received your application. We review every founding member personally — we'll be in touch by email soon.</p>
       </div>
     </div>
   </div>
@@ -350,7 +350,7 @@
     btn.textContent = 'Submitting…';
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/beta_requests`, {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
