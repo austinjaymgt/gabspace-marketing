@@ -490,7 +490,7 @@
         <li><span class="ck">✓</span>Clients, projects &amp; deadlines</li>
         <li><span class="ck">✓</span>Core gabspace tools</li>
       </ul>
-      <a href="#apply" class="btn btn-ghost price-cta js-cta" data-open-label="Get started free →">Request Business</a>
+      <a href="#apply" class="btn btn-ghost price-cta js-cta" data-tier="business" data-open-label="Get started free →">Request Business</a>
     </div>
     <div class="price-card popular" data-monthly="54" data-annual="518.40">
       <div class="price-badge">Most popular</div>
@@ -503,7 +503,7 @@
         <li><span class="ck">✓</span>Orbi cross-business homescreen</li>
         <li><span class="ck">✓</span>Everything in Business</li>
       </ul>
-      <a href="#apply" class="btn btn-primary price-cta js-cta" data-open-label="Get started free →">Request Duo</a>
+      <a href="#apply" class="btn btn-primary price-cta js-cta" data-tier="duo" data-open-label="Get started free →">Request Duo</a>
     </div>
     <div class="price-card" data-monthly="89" data-annual="854.40">
       <div class="price-name">Studio</div>
@@ -515,7 +515,7 @@
         <li><span class="ck">✓</span>Orbi scaled across every business</li>
         <li><span class="ck">✓</span>Everything in Duo</li>
       </ul>
-      <a href="#apply" class="btn btn-ghost price-cta js-cta" data-open-label="Get started free →">Request Studio</a>
+      <a href="#apply" class="btn btn-ghost price-cta js-cta" data-tier="studio" data-open-label="Get started free →">Request Studio</a>
     </div>
   </div>
   <p class="pricing-note">Free during beta &nbsp;·&nbsp; No credit card needed &nbsp;·&nbsp; 14-day trial once billing starts</p>
@@ -648,9 +648,11 @@
   }
 
   // When signups are open, every .js-cta (nav, hero, pricing cards, final
-  // strip) bypasses the #apply request form entirely and sends people
-  // straight to the real signup page — the apply form has no password
-  // field, so it was never able to create an account on its own. Falls
+  // strip) bypasses the #apply request form entirely and sends people to
+  // the proper account-creation + plan-picker flow (app.gabspace.io/get-started)
+  // — the apply form has no password field, so it was never able to create
+  // an account on its own. Pricing-card CTAs carry their tier along via
+  // ?tier= so that flow arrives with the right plan pre-selected. Falls
   // back to the request-access flow already in the markup if this check
   // fails or hasn't resolved yet.
   fetch(`${SUPABASE_URL}/rest/v1/platform_settings?select=signups_open`, {
@@ -660,7 +662,8 @@
     .then(rows => {
       if (rows[0]?.signups_open) {
         document.querySelectorAll('.js-cta').forEach(el => {
-          el.setAttribute('href', 'https://app.gabspace.io');
+          const tier = el.dataset.tier;
+          el.setAttribute('href', tier ? `https://app.gabspace.io/get-started?tier=${tier}` : 'https://app.gabspace.io/get-started');
           if (el.dataset.openLabel) el.textContent = el.dataset.openLabel;
         });
       }
