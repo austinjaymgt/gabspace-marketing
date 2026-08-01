@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gabspace — Business clarity for creative entrepreneurs</title>
-  <meta name="description" content="One clean space to manage clients, projects, finances, and marketing. Built for creative entrepreneurs. Now in closed beta."/>
+  <meta name="description" content="One clean space to manage clients, projects, finances, and marketing. Built for creative entrepreneurs."/>
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg"/>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png"/>
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png"/>
@@ -12,15 +12,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-
-  <!-- =============================================
-    FILL THESE IN BEFORE DEPLOYING
-    Find them in: Supabase Dashboard → Settings → API
-  ============================================= -->
-  <script>
-    const SUPABASE_URL  = "https://dfgbjthfoffsrxwrcnlu.supabase.co";
-    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmZ2JqdGhmb2Zmc3J4d3Jjbmx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMTA0ODAsImV4cCI6MjA5MTY4NjQ4MH0.rTwlOKx4zARbnLEhKPdxltFTk_25TVRiEY8fTsXny_o";
-  </script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -76,9 +67,6 @@
 
     /* ── HERO ── */
     .hero { max-width: 860px; margin: 0 auto; padding: 5.5rem 2.5rem 4rem; text-align: center; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 7px; background: var(--violet-pale); color: var(--violet); font-size: 0.72rem; font-weight: 500; padding: 0.35rem 1rem; border-radius: var(--radius-pill); margin-bottom: 2rem; letter-spacing: 0.08em; text-transform: uppercase; }
-    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--violet); animation: blink 2s infinite; }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.4rem, 5.5vw, 3.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 1.4rem; }
     .hero h1 em { font-style: italic; font-weight: 600; color: var(--violet); }
     .hero p { font-size: 1.1rem; color: var(--ink2); max-width: 520px; margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.75; }
@@ -190,35 +178,6 @@
     .price-cta { width: 100%; box-sizing: border-box; justify-content: center; text-align: center; }
     .pricing-note { font-size: 0.78rem; color: var(--ink3); text-align: center; margin-top: 2rem; }
 
-    /* ── FORM SECTION ── */
-    .form-wrap { background: var(--cream); }
-    .form-inner { max-width: 640px; margin: 0 auto; padding: 5rem 2.5rem; }
-    .form-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; }
-    .form-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 700; color: var(--ink); letter-spacing: -0.025em; margin-bottom: 0.5rem; }
-    .form-sub { font-size: 0.9rem; color: var(--ink3); font-weight: 300; line-height: 1.6; margin-bottom: 2rem; }
-    .field { margin-bottom: 1.1rem; }
-    .field label { display: block; font-size: 0.8rem; font-weight: 500; color: var(--ink2); margin-bottom: 0.4rem; letter-spacing: 0.02em; }
-    .field input,
-    .field select { width: 100%; padding: 0.72rem 1rem; border: 1px solid var(--border); border-radius: 9px; font-family: 'Manrope', sans-serif; font-size: 0.9rem; color: var(--ink); background: var(--white); outline: none; transition: border-color 0.2s, box-shadow 0.2s; appearance: none; -webkit-appearance: none; }
-    .field input::placeholder { color: var(--ink3); }
-    .field input:focus,
-    .field select:focus { border-color: var(--violet); box-shadow: 0 0 0 3px var(--violet-pale); }
-    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .select-wrap { position: relative; }
-    .select-wrap::after { content: ''; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid var(--ink3); pointer-events: none; }
-    .submit-btn { width: 100%; padding: 0.9rem; background: var(--ink); color: var(--white); border: none; border-radius: var(--radius-pill); font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; }
-    .submit-btn:hover:not(:disabled) { background: var(--plum-deep); transform: translateY(-1px); }
-    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    .form-note { font-size: 0.75rem; color: var(--ink3); text-align: center; margin-top: 0.85rem; }
-    .form-error { font-size: 0.8rem; color: var(--rose); margin-top: 0.4rem; display: none; }
-
-    /* ── SUCCESS STATE ── */
-    .success-state { display: none; text-align: center; padding: 1rem 0; }
-    .success-orb { width: 56px; height: 56px; margin: 0 auto 1.25rem; background: var(--orb-gradient); border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%; box-shadow: 0 0 26px rgba(79,168,232,0.5); display: flex; align-items: center; justify-content: center; }
-    .success-orb svg { width: 22px; height: 22px; }
-    .success-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
-    .success-msg { font-size: 0.92rem; color: var(--ink3); font-weight: 300; line-height: 1.7; max-width: 380px; margin: 0 auto; }
-
     /* ── CTA STRIP ── */
     .cta-strip { background: var(--gradient); padding: 5rem 2.5rem; text-align: center; }
     .cta-strip h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--white); margin-bottom: 0.9rem; letter-spacing: -0.02em; }
@@ -239,11 +198,10 @@
     @media (max-width: 640px) {
       nav { padding: 1rem 1.25rem; }
       .nav-links { display: none; }
-      .hero, .section, .beta-inner, .compare-inner, .form-inner { padding: 3.5rem 1.25rem; }
+      .hero, .section, .beta-inner, .compare-inner { padding: 3.5rem 1.25rem; }
       .preview-wrap { padding: 0 1.25rem; }
-      .compare-grid, .price-grid, .shell-inner, .field-row { grid-template-columns: 1fr; }
+      .compare-grid, .price-grid, .shell-inner { grid-template-columns: 1fr; }
       .shell-sidebar { display: none; }
-      .form-card { padding: 1.75rem 1.25rem; }
       footer { flex-direction: column; text-align: center; }
     }
   </style>
@@ -260,25 +218,20 @@
     <li><a href="#features">Features</a></li>
     <li><a href="#how-it-works">How it works</a></li>
     <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#apply">Early access</a></li>
     <li><a href="https://app.gabspace.io">Log in</a></li>
   </ul>
-  <a href="#apply" class="btn btn-primary js-cta" data-open-label="Get started free →">Request access</a>
+  <a href="https://app.gabspace.io/get-started" class="btn btn-primary">Get started free</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="eyebrow">
-    <div class="eyebrow-dot"></div>
-    Closed beta — now accepting early users
-  </div>
   <h1>Business clarity for<br/><em>creative entrepreneurs</em></h1>
   <p>One clean space to manage clients, projects, finances, and marketing — without the learning curve. Built for how creatives actually work.</p>
   <div class="hero-actions">
-    <a href="#apply" class="btn btn-primary btn-lg js-cta" data-open-label="Get started free →">Request early access →</a>
+    <a href="https://app.gabspace.io/get-started" class="btn btn-primary btn-lg">Get started free →</a>
     <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
   </div>
-  <p class="hero-note">Free during beta &nbsp;·&nbsp; Limited spots &nbsp;·&nbsp; Your feedback shapes the product</p>
+  <p class="hero-note">No credit card required &nbsp;·&nbsp; Free 14-day trial &nbsp;·&nbsp; Cancel anytime</p>
 </section>
 
 <!-- TRUST BAR -->
@@ -409,7 +362,7 @@
       <div class="cmp on">
         <div class="cmp-badge">gabspace</div>
         <div class="cmp-name">Gabspace</div>
-        <div class="cmp-price">Free<span> during beta</span></div>
+        <div class="cmp-price">$34<span>/mo</span></div>
         <ul class="cmp-list">
           <li><span class="ck">✓</span>Client management</li>
           <li><span class="ck">✓</span>Project + finance tracking</li>
@@ -433,36 +386,30 @@
   </div>
 </div>
 
-<!-- BETA STEPS -->
+<!-- HOW IT WORKS -->
 <div class="beta-wrap" id="how-it-works">
   <div class="beta-inner">
-    <div class="beta-eye">Early access program</div>
-    <h2 class="beta-title">How the beta works</h2>
-    <p class="beta-sub">Gabspace is in closed beta. We're working closely with a small group of creative entrepreneurs to make sure the product fits the way you actually run your business — before we open the doors wider.</p>
+    <div class="beta-eye">Getting started</div>
+    <h2 class="beta-title">Up and running in one sitting.</h2>
+    <p class="beta-sub">No onboarding calls, no implementation team. Create an account and start managing your business the same day.</p>
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
-        <div class="step-tag tag-v">Apply</div>
-        <div class="step-title">Request access</div>
-        <div class="step-desc">Submit a short request below. We review every application and prioritize creatives who are actively managing clients and projects.</div>
+        <div class="step-tag tag-v">Sign up</div>
+        <div class="step-title">Create your account</div>
+        <div class="step-desc">Sign up free, no credit card required. Pick a plan when you're ready to add billing.</div>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <div class="step-tag tag-s">Onboard</div>
+        <div class="step-tag tag-s">Set up</div>
         <div class="step-title">Get set up in minutes</div>
-        <div class="step-desc">We'll walk you through a quick onboarding checklist. No complicated setup — you'll be managing your first client the same day.</div>
+        <div class="step-desc">A quick onboarding checklist gets your workspace ready. No complicated setup — you'll be managing your first client the same day.</div>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <div class="step-tag tag-a">Use it</div>
+        <div class="step-tag tag-a">Run it</div>
         <div class="step-title">Run your business</div>
-        <div class="step-desc">Use Gabspace for 4–6 weeks the way you'd use any real tool. Track clients, log revenue, update your portal, check your dashboard.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-tag tag-r">Share</div>
-        <div class="step-title">Give us feedback</div>
-        <div class="step-desc">A quick 20-minute call at the end. What worked? What didn't? What would you pay for? Your input directly shapes what gets built next.</div>
+        <div class="step-desc">Track clients, log revenue, share your client portal, and check your dashboard — all in one place.</div>
       </div>
     </div>
   </div>
@@ -472,7 +419,7 @@
 <section class="section" id="pricing">
   <div class="section-eye">Pricing</div>
   <h2 class="section-title">Simple plans, room to grow.</h2>
-  <p class="section-sub">Every plan gets the full toolkit — the difference is how many businesses you can run at once. Free for everyone during the beta.</p>
+  <p class="section-sub">Every plan gets the full toolkit — the difference is how many businesses you can run at once.</p>
 
   <div class="pricing-toggle" role="group" aria-label="Billing period">
     <button class="pt-btn active" data-period="monthly" onclick="setBillingPeriod('monthly')">Monthly</button>
@@ -490,7 +437,7 @@
         <li><span class="ck">✓</span>Clients, projects &amp; deadlines</li>
         <li><span class="ck">✓</span>Core gabspace tools</li>
       </ul>
-      <a href="#apply" class="btn btn-ghost price-cta js-cta" data-tier="business" data-open-label="Get started free →">Request Business</a>
+      <a href="https://app.gabspace.io/get-started?tier=business" class="btn btn-ghost price-cta">Get started</a>
     </div>
     <div class="price-card popular" data-monthly="54" data-annual="518.40">
       <div class="price-badge">Most popular</div>
@@ -503,7 +450,7 @@
         <li><span class="ck">✓</span>Orbi cross-business homescreen</li>
         <li><span class="ck">✓</span>Everything in Business</li>
       </ul>
-      <a href="#apply" class="btn btn-primary price-cta js-cta" data-tier="duo" data-open-label="Get started free →">Request Duo</a>
+      <a href="https://app.gabspace.io/get-started?tier=duo" class="btn btn-primary price-cta">Get started</a>
     </div>
     <div class="price-card" data-monthly="89" data-annual="854.40">
       <div class="price-name">Studio</div>
@@ -515,102 +462,17 @@
         <li><span class="ck">✓</span>Orbi scaled across every business</li>
         <li><span class="ck">✓</span>Everything in Duo</li>
       </ul>
-      <a href="#apply" class="btn btn-ghost price-cta js-cta" data-tier="studio" data-open-label="Get started free →">Request Studio</a>
+      <a href="https://app.gabspace.io/get-started?tier=studio" class="btn btn-ghost price-cta">Get started</a>
     </div>
   </div>
-  <p class="pricing-note">Free during beta &nbsp;·&nbsp; No credit card needed &nbsp;·&nbsp; 14-day trial once billing starts</p>
+  <p class="pricing-note">No credit card required &nbsp;·&nbsp; 14-day free trial &nbsp;·&nbsp; Cancel anytime</p>
 </section>
-
-<!-- APPLY FORM -->
-<div class="form-wrap" id="apply">
-  <div class="form-inner">
-    <div class="form-card">
-
-      <!-- Default form state -->
-      <div id="form-state">
-        <div class="section-eye">Apply for early access</div>
-        <h2 class="form-title">Let's get you in.</h2>
-        <p class="form-sub">Fill in the details below and we'll review your application. Accepted users receive an access link and confirmation email within a few days.</p>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="f-name">Full name</label>
-            <input type="text" id="f-name" placeholder="Jordan Smith" autocomplete="name"/>
-            <span class="form-error" id="err-name">Please enter your name</span>
-          </div>
-          <div class="field">
-            <label for="f-email">Email address</label>
-            <input type="email" id="f-email" placeholder="jordan@studio.com" autocomplete="email"/>
-            <span class="form-error" id="err-email">Please enter a valid email</span>
-          </div>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="f-type">Type of creative</label>
-            <div class="select-wrap">
-              <select id="f-type">
-                <option value="" disabled selected>Select your craft</option>
-                <option>Photographer</option>
-                <option>Videographer</option>
-                <option>Graphic designer</option>
-                <option>Interior designer</option>
-                <option>Illustrator / artist</option>
-                <option>Event planner</option>
-                <option>Content creator</option>
-                <option>Other creative</option>
-              </select>
-            </div>
-            <span class="form-error" id="err-type">Please select your creative type</span>
-          </div>
-          <div class="field">
-            <label for="f-social">Instagram or website</label>
-            <input type="text" id="f-social" placeholder="@yourhandle or yoursite.com"/>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="f-heard">How did you hear about Gabspace?</label>
-          <div class="select-wrap">
-            <select id="f-heard">
-              <option value="" disabled selected>Select one</option>
-              <option>Instagram</option>
-              <option>Facebook group</option>
-              <option>Reddit</option>
-              <option>Word of mouth / friend</option>
-              <option>Google search</option>
-              <option>Other</option>
-            </select>
-          </div>
-        </div>
-
-        <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">
-          Apply for early access →
-        </button>
-        <p class="form-note">Free during beta &nbsp;·&nbsp; No credit card needed &nbsp;·&nbsp; Limited spots available</p>
-        <span class="form-error" id="err-global" style="display:block;text-align:center;margin-top:0.5rem;"></span>
-      </div>
-
-      <!-- Success state -->
-      <div class="success-state" id="success-state">
-        <div class="success-orb">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 6L9 17l-5-5"/>
-          </svg>
-        </div>
-        <h3 class="success-title">You're on the list.</h3>
-        <p class="success-msg">We've received your application and sent a confirmation to your inbox. We'll be in touch soon with your access link.</p>
-      </div>
-
-    </div>
-  </div>
-</div>
 
 <!-- CTA STRIP -->
 <div class="cta-strip">
   <h2>Your business, finally organized.</h2>
   <p>Join creatives already using Gabspace to run clearer, calmer businesses.</p>
-  <a href="#apply" class="btn-white js-cta" data-open-label="Get started free →">Request early access — it's free</a>
+  <a href="https://app.gabspace.io/get-started" class="btn-white">Get started free</a>
 </div>
 
 <!-- FOOTER -->
@@ -623,7 +485,6 @@
   <li><a href="#features">Features</a></li>
   <li><a href="#how-it-works">How it works</a></li>
   <li><a href="#pricing">Pricing</a></li>
-  <li><a href="#apply">Early access</a></li>
   <li><a href="/privacy.html">Privacy</a></li>
   <li><a href="/cookies.html">Cookies</a></li>
   <li><a href="/acceptable-use.html">Acceptable Use</a></li>
@@ -645,90 +506,6 @@
       card.querySelector('.price-num').textContent = '$' + Math.round(price);
       card.querySelector('.price-billed').textContent = period === 'annual' ? `billed $${annual.toFixed(2)}/yr` : '';
     });
-  }
-
-  // When signups are open, every .js-cta (nav, hero, pricing cards, final
-  // strip) bypasses the #apply request form entirely and sends people to
-  // the proper account-creation + plan-picker flow (app.gabspace.io/get-started)
-  // — the apply form has no password field, so it was never able to create
-  // an account on its own. Pricing-card CTAs carry their tier along via
-  // ?tier= so that flow arrives with the right plan pre-selected. Falls
-  // back to the request-access flow already in the markup if this check
-  // fails or hasn't resolved yet.
-  fetch(`${SUPABASE_URL}/rest/v1/platform_settings?select=signups_open`, {
-    headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }
-  })
-    .then(r => r.json())
-    .then(rows => {
-      if (rows[0]?.signups_open) {
-        document.querySelectorAll('.js-cta').forEach(el => {
-          const tier = el.dataset.tier;
-          el.setAttribute('href', tier ? `https://app.gabspace.io/get-started?tier=${tier}` : 'https://app.gabspace.io/get-started');
-          if (el.dataset.openLabel) el.textContent = el.dataset.openLabel;
-        });
-      }
-    })
-    .catch(() => {});
-
-  async function handleSubmit() {
-    const btn = document.getElementById('submit-btn');
-    const name = document.getElementById('f-name').value.trim();
-    const email = document.getElementById('f-email').value.trim();
-    const type = document.getElementById('f-type').value;
-    const social = document.getElementById('f-social').value.trim();
-    const heard = document.getElementById('f-heard').value;
-
-    // Reset errors
-    document.querySelectorAll('.form-error').forEach(el => el.style.display = 'none');
-
-    let valid = true;
-    if (!name) { document.getElementById('err-name').style.display = 'block'; valid = false; }
-    if (!email || !email.includes('@')) { document.getElementById('err-email').style.display = 'block'; valid = false; }
-    if (!type) { document.getElementById('err-type').style.display = 'block'; valid = false; }
-    if (!valid) return;
-
-    btn.disabled = true;
-    btn.textContent = 'Submitting…';
-
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': SUPABASE_ANON,
-          'Authorization': `Bearer ${SUPABASE_ANON}`,
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          creative_type: type,
-          social_link: social || null,
-          how_heard: heard || null
-        })
-      });
-
-      if (res.status === 409) {
-        const errGlobal = document.getElementById('err-global');
-        errGlobal.textContent = "Looks like that email is already on the list. We'll be in touch soon.";
-        errGlobal.style.display = 'block';
-        btn.disabled = false;
-        btn.textContent = 'Apply for early access →';
-        return;
-      }
-
-      if (!res.ok) throw new Error('Submission failed');
-
-      document.getElementById('form-state').style.display = 'none';
-      document.getElementById('success-state').style.display = 'block';
-
-    } catch (err) {
-      const errGlobal = document.getElementById('err-global');
-      errGlobal.textContent = 'Something went wrong. Please try again or email us directly.';
-      errGlobal.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Apply for early access →';
-    }
   }
 </script>
 
