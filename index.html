@@ -68,18 +68,29 @@
     /* ── HERO ── */
     .hero { max-width: 860px; margin: 0 auto; padding: 5.5rem 2.5rem 4rem; text-align: center; }
 
-    /* Same gradients/animations as the app's Orb component (src/components/Orb.jsx) */
-    @keyframes hero-orb-drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-2%,2%) scale(1.03); } }
-    @keyframes hero-orb-halo-pulse { 0%,100% { opacity: 0.75; transform: translate(-50%,-50%) scale(1); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.08); } }
+    /* Identical keyframes to the app's shared orb animations (src/index.css)
+       so every instance — Home hero, corner Orbi widget, and this page —
+       drifts the same way instead of approximating it. */
+    @keyframes hero-orb-drift {
+      0%   { border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%; }
+      25%  { border-radius: 58% 42% 40% 60% / 60% 55% 45% 40%; }
+      50%  { border-radius: 50% 50% 35% 65% / 40% 60% 40% 60%; }
+      75%  { border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; }
+      100% { border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%; }
+    }
+    @keyframes hero-orb-halo-pulse {
+      0%, 100% { opacity: 0.45; transform: translate(-50%, -50%) scale(1); }
+      50%      { opacity: 0.85; transform: translate(-50%, -50%) scale(1.08); }
+    }
     .hero-orb-wrap { position: relative; width: 84px; height: 84px; margin: 0 auto 1.75rem; }
     .hero-orb-halo {
-      position: absolute; top: 50%; left: 50%; width: 143px; height: 143px; margin: -71.5px 0 0 -71.5px;
+      position: absolute; top: 50%; left: 50%; width: 143px; height: 143px;
       border-radius: 50%; filter: blur(14px);
       background: radial-gradient(circle, rgba(183,111,224,0.55) 0%, rgba(107,26,122,0.25) 55%, rgba(107,26,122,0) 75%);
       animation: hero-orb-halo-pulse 3.4s ease-in-out infinite;
     }
     .hero-orb-core {
-      position: absolute; inset: 0; border-radius: 50%;
+      position: absolute; inset: 0; border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
       background: radial-gradient(circle at 35% 30%, #7fd8ff 0%, #4fa8e8 55%, #6a5cd0 100%);
       box-shadow: 0 0 40px rgba(79,168,232,0.45), 0 0 80px rgba(106,92,208,0.3);
       animation: hero-orb-drift 7s ease-in-out infinite;
