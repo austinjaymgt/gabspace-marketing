@@ -67,6 +67,26 @@
 
     /* ── HERO ── */
     .hero { max-width: 860px; margin: 0 auto; padding: 5.5rem 2.5rem 4rem; text-align: center; }
+
+    /* Same gradients/animations as the app's Orb component (src/components/Orb.jsx) */
+    @keyframes hero-orb-drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-2%,2%) scale(1.03); } }
+    @keyframes hero-orb-halo-pulse { 0%,100% { opacity: 0.75; transform: translate(-50%,-50%) scale(1); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.08); } }
+    .hero-orb-wrap { position: relative; width: 84px; height: 84px; margin: 0 auto 1.75rem; }
+    .hero-orb-halo {
+      position: absolute; top: 50%; left: 50%; width: 143px; height: 143px; margin: -71.5px 0 0 -71.5px;
+      border-radius: 50%; filter: blur(14px);
+      background: radial-gradient(circle, rgba(183,111,224,0.55) 0%, rgba(107,26,122,0.25) 55%, rgba(107,26,122,0) 75%);
+      animation: hero-orb-halo-pulse 3.4s ease-in-out infinite;
+    }
+    .hero-orb-core {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #7fd8ff 0%, #4fa8e8 55%, #6a5cd0 100%);
+      box-shadow: 0 0 40px rgba(79,168,232,0.45), 0 0 80px rgba(106,92,208,0.3);
+      animation: hero-orb-drift 7s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-orb-halo, .hero-orb-core { animation: none; }
+    }
     .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.4rem, 5.5vw, 3.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 1.4rem; }
     .hero h1 em { font-style: italic; font-weight: 600; color: var(--violet); }
     .hero p { font-size: 1.1rem; color: var(--ink2); max-width: 520px; margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.75; }
@@ -77,38 +97,6 @@
     .trust-bar { border-top: 0.5px solid var(--border-soft); border-bottom: 0.5px solid var(--border-soft); padding: 1.1rem 2.5rem; display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
     .trust-item { display: flex; align-items: center; gap: 7px; font-size: 0.8rem; color: var(--ink3); }
     .trust-item svg { width: 15px; height: 15px; color: var(--sage); flex-shrink: 0; }
-
-    /* ── APP PREVIEW ── */
-    .preview-wrap { max-width: 860px; margin: 4rem auto 0; padding: 0 2.5rem; }
-    .preview-shell { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-    .shell-bar { background: var(--cream); padding: 0.7rem 1.1rem; display: flex; align-items: center; gap: 6px; border-bottom: 0.5px solid var(--border-soft); }
-    .shell-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .shell-inner { display: grid; grid-template-columns: 170px 1fr; min-height: 320px; }
-    .shell-sidebar { background: var(--plum-deep); border-right: 0.5px solid var(--border-soft); padding: 1.1rem 0.9rem; }
-    .shell-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 1.4rem; }
-    .shell-logo-mark { width: 22px; height: 22px; flex-shrink: 0; background: var(--orb-gradient); border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%; }
-    .shell-logo-name { font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; }
-    .s-group { font-size: 0.62rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(243,234,241,0.5); margin: 1rem 0 0.3rem 0.4rem; }
-    .s-item { display: flex; align-items: center; gap: 7px; padding: 0.4rem 0.55rem; border-radius: 7px; font-size: 0.78rem; color: rgba(243,234,241,0.5); margin-bottom: 1px; }
-    .s-item.on { background: rgba(255,255,255,0.07); color: var(--white); font-weight: 500; }
-    .s-dot { width: 6px; height: 6px; border-radius: 2px; background: var(--orb-silver); flex-shrink: 0; }
-    .s-item.on .s-dot { background: var(--orb-teal); }
-    .shell-main { padding: 1.4rem; }
-    .shell-greeting { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.2rem; }
-    .shell-sub { font-size: 0.72rem; color: var(--ink3); margin-bottom: 1.1rem; }
-    .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 1.1rem; }
-    .kpi { background: var(--cream); border: 0.5px solid var(--border-soft); border-radius: 9px; padding: 0.65rem 0.85rem; }
-    .kpi-l { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink3); margin-bottom: 3px; }
-    .kpi-v { font-size: 1.15rem; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
-    .kpi-d { font-size: 0.65rem; color: var(--sage); margin-top: 2px; }
-    .clients-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink3); font-weight: 500; margin-bottom: 0.45rem; }
-    .c-row { display: flex; align-items: center; gap: 9px; padding: 0.5rem 0; border-bottom: 0.5px solid var(--border-soft); }
-    .c-av { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.62rem; font-weight: 600; flex-shrink: 0; }
-    .c-name { font-size: 0.78rem; font-weight: 500; flex: 1; }
-    .pill { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; border-radius: var(--radius-pill); padding: 3px 9px; }
-    .pill-v { background: var(--violet-pale); color: var(--violet); }
-    .pill-s { background: var(--sage-pale); color: var(--sage); }
-    .pill-a { background: var(--amber-pale); color: var(--amber); }
 
     /* ── SECTIONS ── */
     .section { max-width: 860px; margin: 0 auto; padding: 5rem 2.5rem; }
@@ -125,21 +113,7 @@
     .feat-title { font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; }
     .feat-desc { font-size: 0.82rem; color: var(--ink3); line-height: 1.65; font-weight: 300; }
 
-    /* ── COMPARE ── */
-    .compare-wrap { background: var(--white); border-top: 0.5px solid var(--border-soft); border-bottom: 0.5px solid var(--border-soft); }
-    .compare-inner { max-width: 860px; margin: 0 auto; padding: 5rem 2.5rem; }
-    .compare-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
-    .cmp { background: var(--cream); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.4rem; }
-    .cmp.on { border-color: var(--violet); border-width: 1.5px; background: var(--white); position: relative; }
-    .cmp-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--violet); color: var(--white); font-size: 0.68rem; font-weight: 500; padding: 3px 12px; border-radius: var(--radius-pill); white-space: nowrap; }
-    .cmp-name { font-size: 0.82rem; font-weight: 500; color: var(--ink); margin-bottom: 0.3rem; }
-    .cmp-price { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); margin-bottom: 1rem; }
-    .cmp-price span { font-family: 'Manrope', sans-serif; font-size: 0.78rem; color: var(--ink3); font-weight: 300; }
-    .cmp-list { list-style: none; }
-    .cmp-list li { font-size: 0.78rem; color: var(--ink2); padding: 0.38rem 0; border-bottom: 0.5px solid var(--border-soft); display: flex; align-items: center; gap: 6px; }
-    .cmp-list li:last-child { border-bottom: none; }
     .ck { color: var(--sage); }
-    .cx { color: var(--ink3); }
 
     /* ── BETA STEPS ── */
     .beta-wrap { background: radial-gradient(circle at 50% 0%, var(--plum-deep) 0%, var(--plum-darker) 70%); }
@@ -179,11 +153,10 @@
     .pricing-note { font-size: 0.78rem; color: var(--ink3); text-align: center; margin-top: 2rem; }
 
     /* ── CTA STRIP ── */
-    .cta-strip { background: var(--gradient); padding: 5rem 2.5rem; text-align: center; }
-    .cta-strip h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--white); margin-bottom: 0.9rem; letter-spacing: -0.02em; }
-    .cta-strip p { color: rgba(255,255,255,0.8); font-weight: 300; margin-bottom: 2rem; }
-    .btn-white { background: var(--white); color: var(--ink); font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 500; padding: 0.85rem 2.25rem; border-radius: var(--radius-pill); border: none; cursor: pointer; transition: all 0.2s; }
-    .btn-white:hover { background: var(--cream); transform: translateY(-1px); }
+    .cta-strip { border-top: 0.5px solid var(--border-soft); padding: 2.5rem 2.5rem; text-align: center; }
+    .cta-strip-inner { max-width: 420px; margin: 0 auto; }
+    .cta-strip h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.3rem; letter-spacing: -0.02em; }
+    .cta-strip p { font-size: 0.85rem; color: var(--ink3); font-weight: 300; }
 
     /* ── FOOTER ── */
     footer { border-top: 0.5px solid var(--border-soft); padding: 1.75rem 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
@@ -198,10 +171,8 @@
     @media (max-width: 640px) {
       nav { padding: 1rem 1.25rem; }
       .nav-links { display: none; }
-      .hero, .section, .beta-inner, .compare-inner { padding: 3.5rem 1.25rem; }
-      .preview-wrap { padding: 0 1.25rem; }
-      .compare-grid, .price-grid, .shell-inner { grid-template-columns: 1fr; }
-      .shell-sidebar { display: none; }
+      .hero, .section, .beta-inner { padding: 3.5rem 1.25rem; }
+      .price-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; }
     }
   </style>
@@ -225,8 +196,12 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-orb-wrap">
+    <div class="hero-orb-halo"></div>
+    <div class="hero-orb-core"></div>
+  </div>
   <h1>Business clarity for<br/><em>creative entrepreneurs</em></h1>
-  <p>One clean space to manage clients, projects, finances, and marketing — without the learning curve. Built for how creatives actually work.</p>
+  <p>The whole business in one space instead of six tabs.</p>
   <div class="hero-actions">
     <a href="https://app.gabspace.io/get-started" class="btn btn-primary btn-lg">Get started free →</a>
     <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
@@ -254,59 +229,11 @@
   </div>
 </div>
 
-<!-- APP PREVIEW -->
-<div class="preview-wrap">
-  <div class="preview-shell">
-    <div class="shell-bar">
-      <div class="shell-dot" style="background:#E57373;"></div>
-      <div class="shell-dot" style="background:#FFB74D;"></div>
-      <div class="shell-dot" style="background:#81C784;"></div>
-    </div>
-    <div class="shell-inner">
-      <div class="shell-sidebar">
-        <div class="shell-logo">
-          <div class="shell-logo-mark"></div>
-          <span class="shell-logo-name">gabspace</span>
-        </div>
-        <div class="s-group">Clients</div>
-        <div class="s-item on"><div class="s-dot"></div>Dashboard</div>
-        <div class="s-item"><div class="s-dot"></div>Clients</div>
-        <div class="s-item"><div class="s-dot"></div>Projects</div>
-        <div class="s-group">Business</div>
-        <div class="s-item"><div class="s-dot"></div>Finance</div>
-        <div class="s-item"><div class="s-dot"></div>Tasks</div>
-        <div class="s-item"><div class="s-dot"></div>Vendors</div>
-        <div class="s-group">Marketing</div>
-        <div class="s-item"><div class="s-dot"></div>Campaigns</div>
-        <div class="s-item"><div class="s-dot"></div>Events</div>
-      </div>
-      <div class="shell-main">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;">
-          <div>
-            <div class="shell-greeting">Good morning, Jordan</div>
-            <div class="shell-sub">April 2026 &nbsp;·&nbsp; 3 active projects</div>
-          </div>
-          <button class="btn btn-ghost" style="font-size:0.72rem;padding:0.35rem 0.8rem;">+ New client</button>
-        </div>
-        <div class="kpis">
-          <div class="kpi"><div class="kpi-l">Revenue YTD</div><div class="kpi-v">$14,200</div><div class="kpi-d">↑ 18% vs last year</div></div>
-          <div class="kpi"><div class="kpi-l">Active clients</div><div class="kpi-v">9</div><div class="kpi-d">2 new this month</div></div>
-          <div class="kpi"><div class="kpi-l">Pending</div><div class="kpi-v">$3,800</div><div class="kpi-d">2 in progress</div></div>
-        </div>
-        <div class="clients-label">Recent clients</div>
-        <div class="c-row"><div class="c-av" style="background:var(--violet-pale);color:var(--violet);">SR</div><div class="c-name">Sarah R.</div><span class="pill pill-v">Active</span></div>
-        <div class="c-row"><div class="c-av" style="background:var(--amber-pale);color:var(--amber);">JM</div><div class="c-name">James M.</div><span class="pill pill-a">Prospect</span></div>
-        <div class="c-row"><div class="c-av" style="background:var(--sage-pale);color:var(--sage);">KL</div><div class="c-name">Kim L.</div><span class="pill pill-s">Completed</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- FEATURES -->
 <section class="section" id="features">
   <div class="section-eye">Everything in one place</div>
   <h2 class="section-title">Built around how creatives actually work</h2>
-  <p class="section-sub">Not a generic CRM. Not a complicated suite. Gabspace is structured for the way creative businesses move — from first inquiry to final delivery.</p>
+  <p class="section-sub">Not a generic CRM. No blank templates. gabspace was built by creatives for how creative businesses operate, from inquiries to deliverables.</p>
   <div class="features">
     <div class="feat">
       <div class="feat-icon" style="background:var(--violet-pale);"><svg viewBox="0 0 16 16" fill="none" stroke="#6A3F7A" stroke-width="1.5"><circle cx="6" cy="5" r="2.5"/><path d="M2 13c0-2.2 1.8-4 4-4s4 1.8 4 4"/><circle cx="11" cy="5" r="2"/><path d="M13 12.5c.6-.8 1-1.7 1-2.7"/></svg></div>
@@ -340,51 +267,6 @@
     </div>
   </div>
 </section>
-
-<!-- COMPARE -->
-<div class="compare-wrap">
-  <div class="compare-inner">
-    <div class="section-eye">Why gabspace</div>
-    <h2 class="section-title">Not too rigid. Not too complex.</h2>
-    <p class="section-sub">HoneyBook locks you in. Dubsado takes weeks to configure. Gabspace works on day one — and grows with you.</p>
-    <div class="compare-grid">
-      <div class="cmp">
-        <div class="cmp-name">HoneyBook</div>
-        <div class="cmp-price">$39<span>/mo</span></div>
-        <ul class="cmp-list">
-          <li><span class="ck">✓</span>Client management</li>
-          <li><span class="ck">✓</span>Invoicing &amp; contracts</li>
-          <li><span class="cx">✗</span>Rigid, template-driven</li>
-          <li><span class="cx">✗</span>No marketing tracking</li>
-          <li><span class="cx">✗</span>Limited flexibility</li>
-        </ul>
-      </div>
-      <div class="cmp on">
-        <div class="cmp-badge">gabspace</div>
-        <div class="cmp-name">Gabspace</div>
-        <div class="cmp-price">$34<span>/mo</span></div>
-        <ul class="cmp-list">
-          <li><span class="ck">✓</span>Client management</li>
-          <li><span class="ck">✓</span>Project + finance tracking</li>
-          <li><span class="ck">✓</span>Works immediately</li>
-          <li><span class="ck">✓</span>Marketing &amp; event tracking</li>
-          <li><span class="ck">✓</span>Branded client portal</li>
-        </ul>
-      </div>
-      <div class="cmp">
-        <div class="cmp-name">Dubsado</div>
-        <div class="cmp-price">$40<span>/mo</span></div>
-        <ul class="cmp-list">
-          <li><span class="ck">✓</span>Highly customizable</li>
-          <li><span class="ck">✓</span>Powerful workflows</li>
-          <li><span class="cx">✗</span>Steep learning curve</li>
-          <li><span class="cx">✗</span>Weeks to set up</li>
-          <li><span class="cx">✗</span>Overwhelming for solo users</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- HOW IT WORKS -->
 <div class="beta-wrap" id="how-it-works">
@@ -470,9 +352,10 @@
 
 <!-- CTA STRIP -->
 <div class="cta-strip">
-  <h2>Your business, finally organized.</h2>
-  <p>Join creatives already using Gabspace to run clearer, calmer businesses.</p>
-  <a href="https://app.gabspace.io/get-started" class="btn-white">Get started free</a>
+  <div class="cta-strip-inner">
+    <h2>Your business, finally organized.</h2>
+    <p>Join creatives already using Gabspace to run clearer, calmer businesses.</p>
+  </div>
 </div>
 
 <!-- FOOTER -->
