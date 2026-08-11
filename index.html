@@ -179,12 +179,49 @@
     .foot-links a:hover { color: var(--ink); }
     .foot-copy { font-size: 0.72rem; color: var(--ink3); }
 
+    /* ── MOBILE NAV (hamburger + side drawer) ── */
+    .nav-toggle {
+      display: none; width: 38px; height: 38px; border: none; background: transparent;
+      cursor: pointer; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
+      display: block; width: 20px; height: 1.5px; background: var(--ink); border-radius: 2px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-toggle span { position: relative; }
+    .nav-toggle span::before, .nav-toggle span::after { content: ''; position: absolute; left: 0; }
+    .nav-toggle span::before { top: -6px; }
+    .nav-toggle span::after { top: 6px; }
+    .nav-drawer-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(43,15,42,0.45);
+      opacity: 0; transition: opacity 0.25s ease; z-index: 199;
+    }
+    .nav-drawer {
+      position: fixed; top: 0; right: 0; height: 100%; width: 78%; max-width: 300px;
+      background: var(--cream); z-index: 200; box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+      transform: translateX(100%); transition: transform 0.28s ease;
+      display: flex; flex-direction: column; padding: 1.5rem 1.75rem;
+    }
+    .nav-drawer-top { display: flex; align-items: center; justify-content: flex-end; margin-bottom: 2rem; }
+    .nav-drawer-close { width: 34px; height: 34px; border: none; background: transparent; cursor: pointer; font-size: 1.4rem; color: var(--ink3); line-height: 1; }
+    .nav-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 1.6rem; margin-bottom: 2rem; }
+    .nav-drawer ul a { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--ink); }
+    body.nav-open { overflow: hidden; }
+    body.nav-open .nav-drawer { transform: translateX(0); }
+    body.nav-open .nav-drawer-overlay { display: block; opacity: 1; }
+
     @media (max-width: 640px) {
       nav { padding: 1rem 1.25rem; }
       .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-cta { display: none; }
       .hero, .section, .beta-inner { padding: 3.5rem 1.25rem; }
       .price-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; }
+      .hero-br { display: none; }
+      .trust-bar { gap: 0.9rem 2rem; padding: 1rem 1.25rem; }
+      footer { padding: 1.75rem 1.25rem; }
+      .foot-links { flex-wrap: wrap; justify-content: center; gap: 0.75rem 1.15rem; }
     }
   </style>
 </head>
@@ -202,8 +239,24 @@
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="https://app.gabspace.io">Log in</a></li>
   </ul>
-  <a href="https://app.gabspace.io/get-started" class="btn btn-primary">Get started free</a>
+  <a href="https://app.gabspace.io/get-started" class="btn btn-primary nav-cta">Get started free</a>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" onclick="toggleNav(true)"><span></span></button>
 </nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer-overlay" onclick="toggleNav(false)"></div>
+<div class="nav-drawer" role="dialog" aria-label="Site menu">
+  <div class="nav-drawer-top">
+    <button class="nav-drawer-close" aria-label="Close menu" onclick="toggleNav(false)">&times;</button>
+  </div>
+  <ul>
+    <li><a href="#features" onclick="toggleNav(false)">Features</a></li>
+    <li><a href="#how-it-works" onclick="toggleNav(false)">How it works</a></li>
+    <li><a href="#pricing" onclick="toggleNav(false)">Pricing</a></li>
+    <li><a href="https://app.gabspace.io" onclick="toggleNav(false)">Log in</a></li>
+  </ul>
+  <a href="https://app.gabspace.io/get-started" class="btn btn-primary" style="justify-content:center;" onclick="toggleNav(false)">Get started free</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -211,8 +264,8 @@
     <div class="hero-orb-halo"></div>
     <div class="hero-orb-core"></div>
   </div>
-  <h1>Business clarity for<br/><em>creative entrepreneurs</em></h1>
-  <p>The whole business in one space instead of six tabs.</p>
+  <h1>Business clarity for<br class="hero-br"/> <em>creative entrepreneurs</em></h1>
+  <p>One place to manage the whole business.</p>
   <div class="hero-actions">
     <a href="https://app.gabspace.io/get-started" class="btn btn-primary btn-lg">Get started free →</a>
     <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
@@ -400,6 +453,11 @@
       card.querySelector('.price-num').textContent = '$' + Math.round(price);
       card.querySelector('.price-billed').textContent = period === 'annual' ? `billed $${annual.toFixed(2)}/yr` : '';
     });
+  }
+
+  function toggleNav(open) {
+    document.body.classList.toggle('nav-open', open);
+    document.querySelector('.nav-toggle').setAttribute('aria-expanded', open);
   }
 </script>
 
