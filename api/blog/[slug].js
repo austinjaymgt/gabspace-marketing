@@ -1,4 +1,4 @@
-import { fetchPostBySlug, renderMarkdown, pageShell, formatDate, escapeHtml } from '../../lib/blog.js'
+import { fetchPostBySlug, renderContent, pageShell, formatDate, escapeHtml } from '../../lib/blog.js'
 
 export default async function handler(req, res) {
   const { slug } = req.query
@@ -42,11 +42,11 @@ export default async function handler(req, res) {
 <h1>${escapeHtml(post.title)}</h1>
 <div class="post-meta">${formatDate(post.published_at)}</div>
 ${post.cover_image_url ? `<img class="post-cover" src="${escapeHtml(post.cover_image_url)}" alt="${escapeHtml(post.title)}"/>` : ''}
-<div class="post-body">${renderMarkdown(post.content)}</div>
+<div class="post-body">${renderContent(post.content)}</div>
 <a class="back-link" href="/blog">&larr; Back to the blog</a>
 `
 
   res.setHeader('Content-Type', 'text/html; charset=utf-8')
-  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=3600')
+  res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300')
   res.status(200).send(pageShell({ title, description, canonicalPath: `/blog/${post.slug}`, ogImage: post.cover_image_url, jsonLd, bodyHtml }))
 }

@@ -33,7 +33,7 @@ ${items || '<p>No posts yet — check back soon.</p>'}
 `
 
   res.setHeader('Content-Type', 'text/html; charset=utf-8')
-  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=3600')
+  res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300')
   res.status(200).send(pageShell({
     title: 'Blog — Gabspace',
     description: 'Ideas, guides, and updates for creative entrepreneurs running their business with Gabspace.',
