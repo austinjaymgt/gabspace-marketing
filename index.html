@@ -126,6 +126,20 @@
 
     .ck { color: var(--sage); }
 
+    /* ── CLAUDE CONNECTOR ── */
+    .claude-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .claude-grid .section-sub { margin-bottom: 1.5rem; }
+    .claude-list { list-style: none; }
+    .claude-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; color: var(--ink2); padding: 0.3rem 0; }
+    .chat { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: 0 16px 40px rgba(106,63,122,0.08); display: flex; flex-direction: column; gap: 0.85rem; }
+    .chat-head { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; color: var(--ink3); padding-bottom: 0.75rem; border-bottom: 0.5px solid var(--border-soft); }
+    .chat-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); }
+    .chat-msg { font-size: 0.84rem; line-height: 1.6; border-radius: var(--radius); padding: 0.7rem 0.95rem; max-width: 88%; }
+    .chat-user { align-self: flex-end; background: var(--cream); color: var(--ink); }
+    .chat-bot { align-self: flex-start; color: var(--ink2); padding-left: 0; padding-right: 0; }
+    .chat-tool { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; font-size: 0.7rem; font-weight: 500; color: var(--violet); background: var(--violet-pale); border-radius: var(--radius-pill); padding: 3px 10px; }
+    .chat-bot strong { color: var(--ink); font-weight: 600; }
+
     /* ── BETA STEPS ── */
     .beta-wrap { background: radial-gradient(circle at 50% 0%, var(--plum-deep) 0%, var(--plum-darker) 70%); }
     .beta-inner { max-width: 860px; margin: 0 auto; padding: 5rem 2.5rem; }
@@ -220,6 +234,7 @@
       .nav-cta { display: none; }
       .hero, .section, .beta-inner { padding: 3.5rem 1.25rem; }
       .price-grid { grid-template-columns: 1fr; }
+      .claude-grid { grid-template-columns: 1fr; gap: 2rem; }
       footer { flex-direction: column; text-align: center; }
       .hero-br { display: none; }
       .trust-bar { gap: 0.9rem 2rem; padding: 1rem 1.25rem; }
@@ -238,6 +253,7 @@
   </div>
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
+    <li><a href="#claude">Claude</a></li>
     <li><a href="#how-it-works">How it works</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="/blog">Blog</a></li>
@@ -255,6 +271,7 @@
   </div>
   <ul>
     <li><a href="#features" onclick="toggleNav(false)">Features</a></li>
+    <li><a href="#claude" onclick="toggleNav(false)">Claude</a></li>
     <li><a href="#how-it-works" onclick="toggleNav(false)">How it works</a></li>
     <li><a href="#pricing" onclick="toggleNav(false)">Pricing</a></li>
     <li><a href="/blog" onclick="toggleNav(false)">Blog</a></li>
@@ -333,6 +350,32 @@
       <div class="feat-icon" style="background:var(--sage-pale);"><svg viewBox="0 0 16 16" fill="none" stroke="#1F9C8F" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg></div>
       <div class="feat-title">Business dashboard</div>
       <div class="feat-desc">A personalized overview of your business health — KPIs, recent activity, and upcoming work at a glance.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CLAUDE CONNECTOR -->
+<section class="section" id="claude">
+  <div class="claude-grid">
+    <div>
+      <div class="section-eye">Works with Claude</div>
+      <h2 class="section-title">Ask Claude about your business.</h2>
+      <p class="section-sub">Connect gabspace to Claude and talk to your business in plain language. Claude reads your real clients, projects and numbers, and makes changes only when you ask.</p>
+      <ul class="claude-list">
+        <li><span class="ck">✓</span>Ask what's overdue, who owes you, or how this month compares</li>
+        <li><span class="ck">✓</span>Create tasks, draft invoices, log expenses and plan content</li>
+        <li><span class="ck">✓</span>Works across every business on your account</li>
+        <li><span class="ck">✓</span>Nothing is ever sent to a client or deleted</li>
+      </ul>
+    </div>
+    <div class="chat" aria-label="Example conversation with Claude">
+      <div class="chat-head"><span class="chat-dot"></span>Claude · gabspace connected</div>
+      <div class="chat-msg chat-user">Which invoices are still unpaid, and what's due on the Harper wedding this week?</div>
+      <div class="chat-tool">✦ Checked invoices and projects</div>
+      <div class="chat-msg chat-bot">Two invoices are open: <strong>Lumen Studio</strong> ($1,200, 9 days late) and <strong>Harper wedding</strong> ($3,400, due Friday). The Harper project has the final gallery delivery due Thursday.</div>
+      <div class="chat-msg chat-user">Add a task to follow up with Lumen tomorrow.</div>
+      <div class="chat-tool">✦ Created task</div>
+      <div class="chat-msg chat-bot">Done — “Follow up with Lumen Studio on invoice” is on tomorrow's list.</div>
     </div>
   </div>
 </section>
@@ -436,6 +479,7 @@
   </div>
   <ul class="foot-links">
   <li><a href="#features">Features</a></li>
+  <li><a href="#claude">Claude</a></li>
   <li><a href="#how-it-works">How it works</a></li>
   <li><a href="#pricing">Pricing</a></li>
   <li><a href="/blog">Blog</a></li>
