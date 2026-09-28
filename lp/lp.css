@@ -1,0 +1,151 @@
+/* Shared styles for paid-ad landing pages (/go/:slug → /lp/:slug.html).
+   Tokens mirror index.html so ad traffic lands on the same brand. These
+   pages are mobile-first: most Meta traffic arrives on a phone. */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #2B1A2A;
+  --ink2: #6B7280;
+  --ink3: #9CA3AF;
+  --cream: #F5F5F7;
+  --white: #FFFFFF;
+  --sage: #1F9C8F;
+  --sage-pale: #E0FBF7;
+  --violet: #6A3F7A;
+  --violet-light: #B98FD0;
+  --violet-pale: #EDE5F4;
+  --amber: #E89A4F;
+  --amber-pale: #FDF0E0;
+  --rose: #C0506E;
+  --rose-pale: #FBEEF1;
+  --plum-deep: #2B0F2A;
+  --plum-darker: #160814;
+  --orb-teal: #3FD6C8;
+  --orb-gradient: radial-gradient(circle at 35% 30%, #7FD8FF 0%, #4FA8E8 55%, #6A5CD0 100%);
+  --border: #E2E2E4;
+  --border-soft: #F0F0F2;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 100px;
+}
+
+body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 1.25rem; }
+
+/* ── HEADER (logo only — no nav, so the only way forward is the CTA) ── */
+.lp-head { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; max-width: 1040px; margin: 0 auto; }
+.logo-wrap { display: flex; align-items: center; gap: 9px; }
+.logo-mark { width: 28px; height: 28px; background: var(--orb-gradient); border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%; box-shadow: 0 0 12px rgba(79,168,232,0.45); }
+.logo-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
+.lp-login { font-size: 0.82rem; color: var(--ink3); }
+.lp-login:hover { color: var(--ink); }
+
+/* ── BUTTONS ── */
+.btn { font-family: 'Manrope', sans-serif; font-weight: 600; border-radius: var(--radius-pill); cursor: pointer; border: none; transition: background 0.2s, transform 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.btn-primary { background: var(--ink); color: var(--white); }
+.btn-primary:hover { background: var(--plum-deep); transform: translateY(-1px); }
+.btn-lg { font-size: 1.02rem; padding: 1rem 2rem; min-height: 54px; }
+.btn-light { background: var(--white); color: var(--ink); }
+.btn-light:hover { background: var(--violet-pale); transform: translateY(-1px); }
+.cta-note { font-size: 0.78rem; color: var(--ink3); margin-top: 0.85rem; }
+
+/* ── HERO ── */
+.hero { display: grid; gap: 2.5rem; padding: 2rem 0 3.5rem; align-items: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 7px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.11em; color: var(--violet); background: var(--violet-pale); padding: 5px 12px; border-radius: var(--radius-pill); margin-bottom: 1.1rem; }
+.hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 7vw, 3.4rem); font-weight: 700; line-height: 1.06; letter-spacing: -0.03em; margin-bottom: 1.1rem; }
+.hero h1 em { font-style: italic; font-weight: 600; color: var(--violet); }
+.hero-sub { font-size: 1.08rem; color: var(--ink2); font-weight: 400; line-height: 1.65; max-width: 470px; margin-bottom: 1.75rem; }
+.hero-cta .btn { width: 100%; }
+.hero-points { list-style: none; display: grid; gap: 0.45rem; margin-top: 1.6rem; }
+.hero-points li { display: flex; gap: 9px; font-size: 0.9rem; color: var(--ink2); }
+.ck { color: var(--sage); font-weight: 700; flex-shrink: 0; }
+
+/* ── PRODUCT MOCK (illustrative, built in CSS so it stays crisp and light) ── */
+.mock { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: 0 24px 60px rgba(106,63,122,0.13); padding: 1.1rem; }
+.mock-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.85rem; margin-bottom: 0.85rem; border-bottom: 0.5px solid var(--border-soft); }
+.mock-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; }
+.mock-date { font-size: 0.72rem; color: var(--ink3); }
+.mock-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.9rem; }
+.stat { background: var(--cream); border-radius: var(--radius); padding: 0.7rem 0.8rem; }
+.stat-label { font-size: 0.66rem; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+.stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; line-height: 1.3; }
+.stat-num small { font-size: 0.7rem; font-weight: 500; color: var(--sage); margin-left: 4px; font-family: 'Manrope', sans-serif; }
+.mock-row { display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 0.2rem; border-bottom: 0.5px solid var(--border-soft); }
+.mock-row:last-child { border-bottom: none; padding-bottom: 0.1rem; }
+.mock-dot { width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+.mock-text { flex: 1; min-width: 0; }
+.mock-name { font-size: 0.82rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mock-meta { font-size: 0.72rem; color: var(--ink3); }
+.tag { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; border-radius: var(--radius-pill); padding: 3px 9px; flex-shrink: 0; }
+.v { background: var(--violet-pale); color: var(--violet); }
+.s { background: var(--sage-pale); color: var(--sage); }
+.a { background: var(--amber-pale); color: #B8691F; }
+.r { background: var(--rose-pale); color: var(--rose); }
+.mock-switch { display: flex; gap: 6px; margin-bottom: 0.9rem; flex-wrap: wrap; }
+.biz { display: inline-flex; align-items: center; gap: 6px; font-size: 0.74rem; font-weight: 600; padding: 5px 11px 5px 6px; border-radius: var(--radius-pill); border: 1px solid var(--border); color: var(--ink2); }
+.biz i { width: 16px; height: 16px; border-radius: 50%; }
+.biz.on { border-color: var(--violet); color: var(--ink); background: var(--violet-pale); }
+
+/* ── PAIN → FIX ── */
+.section { padding: 3.5rem 0; }
+.section-eye { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--violet); margin-bottom: 0.7rem; }
+.section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 2rem; max-width: 620px; }
+.swaps { display: grid; gap: 0.9rem; }
+.swap { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.15rem 1.2rem; }
+.swap-before { font-size: 0.84rem; color: var(--ink3); text-decoration: line-through; text-decoration-color: rgba(192,80,110,0.5); margin-bottom: 0.35rem; }
+.swap-after { font-size: 0.95rem; font-weight: 600; color: var(--ink); display: flex; gap: 8px; }
+.swap-desc { font-size: 0.84rem; color: var(--ink2); margin-top: 0.3rem; padding-left: 1.3rem; }
+
+/* ── STEPS ── */
+.steps { display: grid; gap: 0.9rem; counter-reset: step; }
+.step { display: flex; gap: 1rem; align-items: flex-start; }
+.step-num { font-family: 'Space Grotesk', sans-serif; width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+.step-title { font-weight: 600; font-size: 0.98rem; }
+.step-desc { font-size: 0.86rem; color: var(--ink2); }
+
+/* ── PRICE LINE ── */
+.price-line { margin-top: 2.5rem; background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.3rem 1.4rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; align-items: center; justify-content: space-between; }
+.price-line strong { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; }
+.price-line span { font-size: 0.84rem; color: var(--ink2); }
+
+/* ── FAQ ── */
+.faq { display: grid; gap: 0.6rem; max-width: 720px; }
+.faq details { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 0 1.2rem; }
+.faq summary { cursor: pointer; list-style: none; font-weight: 600; font-size: 0.94rem; padding: 1rem 0; display: flex; justify-content: space-between; gap: 1rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; color: var(--ink3); font-weight: 400; font-size: 1.2rem; line-height: 1; }
+.faq details[open] summary::after { content: '–'; }
+.faq p { font-size: 0.88rem; color: var(--ink2); padding-bottom: 1.1rem; }
+
+/* ── FINAL CTA ── */
+.final { background: radial-gradient(circle at 50% 0%, var(--plum-deep) 0%, var(--plum-darker) 75%); color: var(--white); text-align: center; padding: 4rem 1.25rem; }
+.final h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.12; margin-bottom: 0.8rem; }
+.final p { color: rgba(255,255,255,0.6); max-width: 440px; margin: 0 auto 1.75rem; }
+.final .cta-note { color: rgba(255,255,255,0.45); }
+
+/* ── FOOTER ── */
+.lp-foot { padding: 1.5rem 1.25rem 6rem; text-align: center; font-size: 0.75rem; color: var(--ink3); display: grid; gap: 0.5rem; }
+.lp-foot nav { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.lp-foot a:hover { color: var(--ink); }
+
+/* ── STICKY MOBILE CTA (shown once the hero button scrolls away) ── */
+.sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom)); background: rgba(245,245,247,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 0.5px solid var(--border); transform: translateY(110%); transition: transform 0.25s ease; }
+.sticky-cta.show { transform: translateY(0); }
+.sticky-cta .btn { width: 100%; }
+
+@media (min-width: 820px) {
+  .lp-head { padding: 1.25rem 2rem; }
+  .wrap { padding: 0 2rem; }
+  .hero { grid-template-columns: 1.05fr 1fr; gap: 3.5rem; padding: 3.5rem 0 5rem; }
+  .hero-cta .btn { width: auto; }
+  .section { padding: 4.5rem 0; }
+  .swaps { grid-template-columns: repeat(3, 1fr); }
+  .steps { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .lp-foot { padding-bottom: 2rem; }
+  .sticky-cta { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .sticky-cta { transition: none; }
+}
