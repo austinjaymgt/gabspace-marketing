@@ -292,7 +292,7 @@
     <a href="https://app.gabspace.io/get-started" class="btn btn-primary btn-lg">Get started free →</a>
     <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
   </div>
-  <p class="hero-note">No credit card required &nbsp;·&nbsp; Free 14-day trial &nbsp;·&nbsp; Cancel anytime</p>
+  <p class="hero-note">Free for creative folks &nbsp;·&nbsp; No credit card &nbsp;·&nbsp; No trial clock</p>
 </section>
 
 <!-- TRUST BAR -->
@@ -391,7 +391,7 @@
         <div class="step-num">01</div>
         <div class="step-tag tag-v">Sign up</div>
         <div class="step-title">Create your account</div>
-        <div class="step-desc">Sign up free, no credit card required. Pick a plan when you're ready to add billing.</div>
+        <div class="step-desc">Sign up free, no credit card required. No plans to pick, no trial to run out.</div>
       </div>
       <div class="step">
         <div class="step-num">02</div>
@@ -412,54 +412,25 @@
 <!-- PRICING -->
 <section class="section" id="pricing">
   <div class="section-eye">Pricing</div>
-  <h2 class="section-title">Simple plans, room to grow.</h2>
-  <p class="section-sub">Every plan gets the full toolkit — the difference is how many businesses you can run at once.</p>
+  <h2 class="section-title">Free for creatives.</h2>
+  <p class="section-sub">No tiers, no trial clock, no credit card. Everything gabspace does, for every creative business you run.</p>
 
-  <div class="pricing-toggle" role="group" aria-label="Billing period">
-    <button class="pt-btn active" data-period="monthly" onclick="setBillingPeriod('monthly')">Monthly</button>
-    <button class="pt-btn" data-period="annual" onclick="setBillingPeriod('annual')">Annual <span class="save-badge">Save 20%</span></button>
-  </div>
-
-  <div class="price-grid">
-    <div class="price-card" data-monthly="34" data-annual="326.40">
-      <div class="price-name">Business</div>
-      <div class="price-tagline">For running one thing, beautifully.</div>
-      <div class="price-amount"><span class="price-num">$34</span><span class="price-per">/mo</span></div>
+  <div class="price-grid" style="grid-template-columns: minmax(0, 420px); justify-content: center;">
+    <div class="price-card popular">
+      <div class="price-name">gabspace</div>
+      <div class="price-tagline">For running every thing, beautifully.</div>
+      <div class="price-amount"><span class="price-num">$0</span><span class="price-per">/forever</span></div>
       <div class="price-billed"></div>
       <ul class="price-features">
-        <li><span class="ck">✓</span>1 business profile</li>
-        <li><span class="ck">✓</span>Clients, projects &amp; deadlines</li>
-        <li><span class="ck">✓</span>Core gabspace tools</li>
+        <li><span class="ck">✓</span>Unlimited business profiles</li>
+        <li><span class="ck">✓</span>Clients, projects, invoices &amp; deadlines</li>
+        <li><span class="ck">✓</span>Orbi across every business</li>
+        <li><span class="ck">✓</span>Client portal &amp; the community board</li>
       </ul>
-      <a href="https://app.gabspace.io/get-started?tier=business" class="btn btn-ghost price-cta">Get started</a>
-    </div>
-    <div class="price-card popular" data-monthly="54" data-annual="518.40">
-      <div class="price-badge">Most popular</div>
-      <div class="price-name">Duo</div>
-      <div class="price-tagline">For the people who run more than one thing.</div>
-      <div class="price-amount"><span class="price-num">$54</span><span class="price-per">/mo</span></div>
-      <div class="price-billed"></div>
-      <ul class="price-features">
-        <li><span class="ck">✓</span>2 business profiles</li>
-        <li><span class="ck">✓</span>Orbi cross-business homescreen</li>
-        <li><span class="ck">✓</span>Everything in Business</li>
-      </ul>
-      <a href="https://app.gabspace.io/get-started?tier=duo" class="btn btn-primary price-cta">Get started</a>
-    </div>
-    <div class="price-card" data-monthly="89" data-annual="854.40">
-      <div class="price-name">Studio</div>
-      <div class="price-tagline">For the full operation.</div>
-      <div class="price-amount"><span class="price-num">$89</span><span class="price-per">/mo</span></div>
-      <div class="price-billed"></div>
-      <ul class="price-features">
-        <li><span class="ck">✓</span>3+ business profiles</li>
-        <li><span class="ck">✓</span>Orbi scaled across every business</li>
-        <li><span class="ck">✓</span>Everything in Duo</li>
-      </ul>
-      <a href="https://app.gabspace.io/get-started?tier=studio" class="btn btn-ghost price-cta">Get started</a>
+      <a href="https://app.gabspace.io/get-started" class="btn btn-primary price-cta">Get started free</a>
     </div>
   </div>
-  <p class="pricing-note">No credit card required &nbsp;·&nbsp; 14-day free trial &nbsp;·&nbsp; Cancel anytime</p>
+  <p class="pricing-note">No credit card &nbsp;·&nbsp; No trial &nbsp;·&nbsp; Nothing to cancel</p>
 </section>
 
 <!-- CTA STRIP -->
@@ -492,20 +463,6 @@
 </footer>
 
 <script>
-  // Pricing tier cards show monthly by default; toggling recomputes the
-  // displayed number from each card's data-monthly/data-annual attributes
-  // rather than swapping in separate markup per period.
-  function setBillingPeriod(period) {
-    document.querySelectorAll('.pt-btn').forEach(b => b.classList.toggle('active', b.dataset.period === period));
-    document.querySelectorAll('.price-card').forEach(card => {
-      const monthly = parseFloat(card.dataset.monthly);
-      const annual = parseFloat(card.dataset.annual);
-      const price = period === 'monthly' ? monthly : annual / 12;
-      card.querySelector('.price-num').textContent = '$' + Math.round(price);
-      card.querySelector('.price-billed').textContent = period === 'annual' ? `billed $${annual.toFixed(2)}/yr` : '';
-    });
-  }
-
   function toggleNav(open) {
     document.body.classList.toggle('nav-open', open);
     document.querySelector('.nav-toggle').setAttribute('aria-expanded', open);
